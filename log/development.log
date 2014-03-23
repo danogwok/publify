@@ -1,0 +1,741 @@
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Creating scope :published_at. Overwriting existing method Article.published_at.
+Creating scope :spam. Overwriting existing method Comment.spam.
+Creating scope :presumed_spam. Overwriting existing method Comment.presumed_spam.
+Creating scope :presumed_ham. Overwriting existing method Comment.presumed_ham.
+Creating scope :ham. Overwriting existing method Comment.ham.
+
+
+Started GET "/" for 127.0.0.1 at 2014-03-24 01:20:16 +0300
+You have no blog installed.
+
+ActiveRecord::StatementInvalid (Could not find table 'contents'):
+  app/models/note.rb:21:in `<class:Note>'
+  app/models/note.rb:1:in `<top (required)>'
+  app/models/blog_sweeper.rb:2:in `<class:BlogSweeper>'
+  app/models/blog_sweeper.rb:1:in `<top (required)>'
+  app/controllers/articles_controller.rb:8:in `<class:ArticlesController>'
+  app/controllers/articles_controller.rb:1:in `<top (required)>'
+
+
+  Rendered /home/danogwok/.rvm/gems/ruby-1.9.3-p392/gems/actionpack-3.2.17/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.4ms)
+  Rendered /home/danogwok/.rvm/gems/ruby-1.9.3-p392/gems/actionpack-3.2.17/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (14.7ms)
+  Rendered /home/danogwok/.rvm/gems/ruby-1.9.3-p392/gems/actionpack-3.2.17/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (35.7ms)
+Connecting to database specified by database.yml
+Creating scope :published_at. Overwriting existing method Article.published_at.
+Creating scope :spam. Overwriting existing method Comment.spam.
+Creating scope :presumed_spam. Overwriting existing method Comment.presumed_spam.
+Creating scope :presumed_ham. Overwriting existing method Comment.presumed_ham.
+Creating scope :ham. Overwriting existing method Comment.ham.
+  [1m[36m (0.3ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (187.8ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (99.4ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (36.9ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+Migrating to InitialSchema (92)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  CREATE TABLE "articles_tags" ("article_id" integer, "tag_id" integer) 
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "blogs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "settings" text, "base_url" varchar(255)) [0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "categories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "position" integer, "permalink" varchar(255), "keywords" text, "description" text, "parent_id" integer) 
+  [1m[36m (0.3ms)[0m  [1mCREATE INDEX "index_categories_on_permalink" ON "categories" ("permalink")[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "categorizations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "article_id" integer, "category_id" integer, "is_primary" boolean) 
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "contents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "type" varchar(255), "title" varchar(255), "author" varchar(255), "body" text, "extended" text, "excerpt" text, "created_at" datetime, "updated_at" datetime, "user_id" integer, "permalink" varchar(255), "guid" varchar(255), "text_filter_id" integer, "whiteboard" text, "name" varchar(255), "published" boolean DEFAULT 'f', "allow_pings" boolean, "allow_comments" boolean, "published_at" datetime, "state" varchar(255), "parent_id" integer, "password" varchar(255)) [0m
+  [1m[35m (0.3ms)[0m  CREATE INDEX "index_contents_on_published" ON "contents" ("published")
+  [1m[36m (0.4ms)[0m  [1mCREATE INDEX "index_contents_on_text_filter_id" ON "contents" ("text_filter_id")[0m
+  [1m[35m (0.6ms)[0m  CREATE TABLE "feedback" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "type" varchar(255), "title" varchar(255), "author" varchar(255), "body" text, "excerpt" text, "created_at" datetime, "updated_at" datetime, "user_id" integer, "guid" varchar(255), "text_filter_id" integer, "whiteboard" text, "article_id" integer, "email" varchar(255), "url" varchar(255), "ip" varchar(40), "blog_name" varchar(255), "published" boolean DEFAULT 'f', "published_at" datetime, "state" varchar(255), "status_confirmed" boolean) 
+  [1m[36m (0.3ms)[0m  [1mCREATE INDEX "index_feedback_on_article_id" ON "feedback" ("article_id")[0m
+  [1m[35m (0.3ms)[0m  CREATE INDEX "index_feedback_on_text_filter_id" ON "feedback" ("text_filter_id")
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "notifications" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "content_id" integer, "user_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "page_caches" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255)) 
+  [1m[36m (0.3ms)[0m  [1mCREATE INDEX "index_page_caches_on_name" ON "page_caches" ("name")[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "pings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "article_id" integer, "url" varchar(255), "created_at" datetime) 
+  [1m[36m (0.3ms)[0m  [1mCREATE INDEX "index_pings_on_article_id" ON "pings" ("article_id")[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "profiles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "label" varchar(255), "nicename" varchar(255), "modules" text) 
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "profiles_rights" ("profile_id" integer, "right_id" integer) [0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "redirects" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "from_path" varchar(255), "to_path" varchar(255)) 
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "resources" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "size" integer, "filename" varchar(255), "mime" varchar(255), "created_at" datetime, "updated_at" datetime, "article_id" integer, "itunes_metadata" boolean, "itunes_author" varchar(255), "itunes_subtitle" varchar(255), "itunes_duration" integer, "itunes_summary" text, "itunes_keywords" varchar(255), "itunes_category" varchar(255), "itunes_explicit" boolean) [0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "rights" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" varchar(255)) 
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "sidebars" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "active_position" integer, "config" text, "staged_position" integer, "type" varchar(255)) [0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "sitealizer" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "path" varchar(255), "ip" varchar(255), "referer" varchar(255), "language" varchar(255), "user_agent" varchar(255), "created_at" datetime, "created_on" date) 
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "tags" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime, "display_name" varchar(255)) [0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "text_filters" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" varchar(255), "markup" varchar(255), "filters" text, "params" text) 
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "triggers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "pending_item_id" integer, "pending_item_type" varchar(255), "due_at" datetime, "trigger_method" varchar(255)) [0m
+  [1m[35m (0.8ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "notify_watch_my_articles" boolean, "jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "firstname" varchar(255), "lastname" varchar(255), "nickname" varchar(255), "url" varchar(255), "msn" varchar(255), "aim" varchar(255), "yahoo" varchar(255), "twitter" varchar(255), "description" text, "show_url" boolean, "show_msn" boolean, "show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) 
+  [1m[36m (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('92')[0m
+  [1m[35m (88.7ms)[0m  commit transaction
+Migrating to AddRedirectionsModel (93)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+DEPRECATION WARNING: Calling set_inheritance_column is deprecated. Please use `self.inheritance_column = 'the_name'` instead. (called from <class:Content> at /home/danogwok/projects/danogwok/db/migrate/093_add_redirections_model.rb:19)
+  [1m[35m (0.7ms)[0m  CREATE TABLE "redirections" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "content_id" integer, "redirect_id" integer) 
+  [1m[36mAddRedirectionsModel::Content Load (0.3ms)[0m  [1mSELECT "contents".* FROM "contents" WHERE (published = 't' AND published_at < '2014-03-23 22:20:46.929747')[0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('93')
+  [1m[36m (86.3ms)[0m  [1mcommit transaction[0m
+Migrating to FixExtendedOnRssBehavior (94)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mBlog Load (0.3ms)[0m  [1mSELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('94')
+  [1m[36m (98.6ms)[0m  [1mcommit transaction[0m
+Migrating to AddsSeoToProfiles (95)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mAddsSeoToProfiles::Profile Load (0.3ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."label" = 'admin' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('95')
+  [1m[36m (105.0ms)[0m  [1mcommit transaction[0m
+Migrating to AddOriginToRedirects (96)
+  [1m[35m (0.1ms)[0m  begin transaction
+DEPRECATION WARNING: Calling set_inheritance_column is deprecated. Please use `self.inheritance_column = 'the_name'` instead. (called from <class:Content> at /home/danogwok/projects/danogwok/db/migrate/096_add_origin_to_redirects.rb:19)
+  [1m[36m (0.8ms)[0m  [1mALTER TABLE "redirects" ADD "origin" varchar(255)[0m
+  [1m[35mAddOriginToRedirects::Content Load (0.4ms)[0m  SELECT "contents".* FROM "contents" WHERE (published = 't' AND published_at < '2014-03-23 22:20:47.287884')
+  [1m[36m (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('96')[0m
+  [1m[35m (116.1ms)[0m  commit transaction
+Migrating to FixNofollowOptionsBehavior (97)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mBlog Load (0.4ms)[0m  SELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('97')[0m
+  [1m[35m (119.0ms)[0m  commit transaction
+Migrating to AddUsersSettings (98)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.2ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "firstname" varchar(255), "lastname" varchar(255), "nickname" varchar(255), "url" varchar(255), "msn" varchar(255), "aim" varchar(255), "yahoo" varchar(255), "twitter" varchar(255), "description" text, "show_url" boolean, "show_msn" boolean, "show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) 
+  [1m[36m (0.4ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.5ms)[0m  DROP TABLE "users"
+  [1m[36m (0.9ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "firstname" varchar(255), "lastname" varchar(255), "nickname" varchar(255), "url" varchar(255), "msn" varchar(255), "aim" varchar(255), "yahoo" varchar(255), "twitter" varchar(255), "description" text, "show_url" boolean, "show_msn" boolean, "show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) [0m
+  [1m[35m (0.3ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.4ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.9ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "firstname" varchar(255), "lastname" varchar(255), "nickname" varchar(255), "url" varchar(255), "msn" varchar(255), "aim" varchar(255), "yahoo" varchar(255), "twitter" varchar(255), "description" text, "show_url" boolean, "show_msn" boolean, "show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) 
+  [1m[36m (0.3ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.5ms)[0m  DROP TABLE "users"
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "firstname" varchar(255), "lastname" varchar(255), "nickname" varchar(255), "url" varchar(255), "msn" varchar(255), "aim" varchar(255), "yahoo" varchar(255), "twitter" varchar(255), "description" text, "show_url" boolean, "show_msn" boolean, "show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) [0m
+  [1m[35m (0.3ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.8ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "lastname" varchar(255), "nickname" varchar(255), "url" varchar(255), "msn" varchar(255), "aim" varchar(255), "yahoo" varchar(255), "twitter" varchar(255), "description" text, "show_url" boolean, "show_msn" boolean, "show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) 
+  [1m[36m (0.3ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "users"
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "lastname" varchar(255), "nickname" varchar(255), "url" varchar(255), "msn" varchar(255), "aim" varchar(255), "yahoo" varchar(255), "twitter" varchar(255), "description" text, "show_url" boolean, "show_msn" boolean, "show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) [0m
+  [1m[35m (0.3ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.8ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "nickname" varchar(255), "url" varchar(255), "msn" varchar(255), "aim" varchar(255), "yahoo" varchar(255), "twitter" varchar(255), "description" text, "show_url" boolean, "show_msn" boolean, "show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) 
+  [1m[36m (0.3ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "users"
+  [1m[36m (0.9ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "nickname" varchar(255), "url" varchar(255), "msn" varchar(255), "aim" varchar(255), "yahoo" varchar(255), "twitter" varchar(255), "description" text, "show_url" boolean, "show_msn" boolean, "show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) [0m
+  [1m[35m (0.3ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.8ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "url" varchar(255), "msn" varchar(255), "aim" varchar(255), "yahoo" varchar(255), "twitter" varchar(255), "description" text, "show_url" boolean, "show_msn" boolean, "show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) 
+  [1m[36m (0.3ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.5ms)[0m  DROP TABLE "users"
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "url" varchar(255), "msn" varchar(255), "aim" varchar(255), "yahoo" varchar(255), "twitter" varchar(255), "description" text, "show_url" boolean, "show_msn" boolean, "show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) [0m
+  [1m[35m (0.3ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.8ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "url" varchar(255), "msn" varchar(255), "aim" varchar(255), "yahoo" varchar(255), "twitter" varchar(255), "s_description" text, "show_url" boolean, "show_msn" boolean, "show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) 
+  [1m[36m (0.4ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "users"
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "url" varchar(255), "msn" varchar(255), "aim" varchar(255), "yahoo" varchar(255), "twitter" varchar(255), "s_description" text, "show_url" boolean, "show_msn" boolean, "show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) [0m
+  [1m[35m (0.3ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.8ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "msn" varchar(255), "aim" varchar(255), "yahoo" varchar(255), "twitter" varchar(255), "s_description" text, "show_url" boolean, "show_msn" boolean, "show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) 
+  [1m[36m (0.4ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "users"
+  [1m[36m (0.9ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "msn" varchar(255), "aim" varchar(255), "yahoo" varchar(255), "twitter" varchar(255), "s_description" text, "show_url" boolean, "show_msn" boolean, "show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) [0m
+  [1m[35m (0.3ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.8ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "aim" varchar(255), "yahoo" varchar(255), "twitter" varchar(255), "s_description" text, "show_url" boolean, "show_msn" boolean, "show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) 
+  [1m[36m (0.4ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "users"
+  [1m[36m (0.9ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "aim" varchar(255), "yahoo" varchar(255), "twitter" varchar(255), "s_description" text, "show_url" boolean, "show_msn" boolean, "show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) [0m
+  [1m[35m (0.3ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.8ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "yahoo" varchar(255), "twitter" varchar(255), "s_description" text, "show_url" boolean, "show_msn" boolean, "show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) 
+  [1m[36m (0.3ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "users"
+  [1m[36m (0.9ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "yahoo" varchar(255), "twitter" varchar(255), "s_description" text, "show_url" boolean, "show_msn" boolean, "show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) [0m
+  [1m[35m (0.3ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.8ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "twitter" varchar(255), "s_description" text, "show_url" boolean, "show_msn" boolean, "show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) 
+  [1m[36m (0.4ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "users"
+  [1m[36m (0.9ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "twitter" varchar(255), "s_description" text, "show_url" boolean, "show_msn" boolean, "show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) [0m
+  [1m[35m (0.3ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.9ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_description" text, "show_url" boolean, "show_msn" boolean, "show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) 
+  [1m[36m (0.4ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "users"
+  [1m[36m (0.9ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_description" text, "show_url" boolean, "show_msn" boolean, "show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) [0m
+  [1m[35m (0.3ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.8ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_description" text, "show_url" boolean, "show_msn" boolean, "show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) 
+  [1m[36m (0.4ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "users"
+  [1m[36m (1.3ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_description" text, "show_url" boolean, "show_msn" boolean, "show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) [0m
+  [1m[35m (0.3ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.8ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_description" text, "s_show_url" boolean, "show_msn" boolean, "show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) 
+  [1m[36m (0.4ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "users"
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_description" text, "s_show_url" boolean, "show_msn" boolean, "show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) [0m
+  [1m[35m (0.3ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.8ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_description" text, "s_show_url" boolean, "s_show_msn" boolean, "show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) 
+  [1m[36m (0.3ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "users"
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_description" text, "s_show_url" boolean, "s_show_msn" boolean, "show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) [0m
+  [1m[35m (0.3ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.8ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_description" text, "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) 
+  [1m[36m (0.3ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "users"
+  [1m[36m (0.9ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_description" text, "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) [0m
+  [1m[35m (0.3ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.8ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_description" text, "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) 
+  [1m[36m (0.3ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "users"
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_description" text, "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) [0m
+  [1m[35m (0.3ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.9ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_description" text, "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) 
+  [1m[36m (0.3ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "users"
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_description" text, "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "show_jabber" boolean, "last_connection" datetime) [0m
+  [1m[35m (0.3ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.8ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_description" text, "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime) 
+  [1m[36m (0.4ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "users"
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_description" text, "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime) [0m
+  [1m[35m (0.3ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.7ms)[0m  ALTER TABLE "users" ADD "settings" text
+  [1m[36mAddUsersSettings::BareUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" [0m
+  [1m[35m (0.8ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_notify_watch_my_articles" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_description" text, "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) 
+  [1m[36m (0.3ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "users"
+  [1m[36m (0.9ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_description" text, "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) [0m
+  [1m[35m (0.3ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.8ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "s_editor" varchar(255) DEFAULT 'simple', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_description" text, "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) 
+  [1m[36m (0.3ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "users"
+  [1m[36m (0.9ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_description" text, "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) [0m
+  [1m[35m (0.3ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.8ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_firstname" varchar(255), "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_description" text, "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) 
+  [1m[36m (0.3ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "users"
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_description" text, "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) [0m
+  [1m[35m (0.3ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.8ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_lastname" varchar(255), "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_description" text, "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) 
+  [1m[36m (0.3ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "users"
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_description" text, "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) [0m
+  [1m[35m (0.3ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.7ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_nickname" varchar(255), "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_description" text, "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) 
+  [1m[36m (0.4ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "users"
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_description" text, "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) [0m
+  [1m[35m (0.3ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.7ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_description" text, "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) 
+  [1m[36m (0.3ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "users"
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) [0m
+  [1m[35m (0.3ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.7ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_url" varchar(255), "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) 
+  [1m[36m (0.3ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "users"
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) [0m
+  [1m[35m (0.3ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (1.1ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_msn" varchar(255), "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) 
+  [1m[36m (0.5ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.6ms)[0m  DROP TABLE "users"
+  [1m[36m (1.2ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) [0m
+  [1m[35m (0.5ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.4ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.7ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_aim" varchar(255), "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) 
+  [1m[36m (10.1ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "users"
+  [1m[36m (0.7ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) [0m
+  [1m[35m (0.3ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.7ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_yahoo" varchar(255), "s_twitter" varchar(255), "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) 
+  [1m[36m (0.2ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "users"
+  [1m[36m (0.7ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_twitter" varchar(255), "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) [0m
+  [1m[35m (0.3ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.6ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_twitter" varchar(255), "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) 
+  [1m[36m (0.2ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "users"
+  [1m[36m (0.7ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) [0m
+  [1m[35m (0.3ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.6ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "s_jabber" varchar(255), "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) 
+  [1m[36m (0.2ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "users"
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) [0m
+  [1m[35m (0.2ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.6ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_show_url" boolean, "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) 
+  [1m[36m (0.2ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "users"
+  [1m[36m (0.7ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) [0m
+  [1m[35m (0.2ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.6ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_show_msn" boolean, "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) 
+  [1m[36m (0.2ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "users"
+  [1m[36m (0.7ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) [0m
+  [1m[35m (0.3ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.6ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_show_aim" boolean, "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) 
+  [1m[36m (0.2ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "users"
+  [1m[36m (0.6ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) [0m
+  [1m[35m (0.2ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.6ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_show_yahoo" boolean, "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) 
+  [1m[36m (0.2ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "users"
+  [1m[36m (0.6ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) [0m
+  [1m[35m (0.2ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.6ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_show_twitter" boolean, "s_show_jabber" boolean, "last_connection" datetime, "settings" text) 
+  [1m[36m (0.2ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "users"
+  [1m[36m (0.6ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_show_jabber" boolean, "last_connection" datetime, "settings" text) [0m
+  [1m[35m (0.2ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.6ms)[0m  CREATE TEMPORARY TABLE "altered_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "s_show_jabber" boolean, "last_connection" datetime, "settings" text) 
+  [1m[36m (0.2ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "users"
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "password" varchar(255), "email" text, "name" text, "notify_via_email" boolean, "notify_on_new_articles" boolean, "notify_on_comments" boolean, "profile_id" integer, "remember_token" varchar(255), "remember_token_expires_at" datetime, "text_filter_id" varchar(255) DEFAULT '1', "state" varchar(255) DEFAULT 'active', "last_connection" datetime, "settings" text) [0m
+  [1m[35m (0.2ms)[0m  SELECT * FROM "altered_users"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_users"[0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('98')
+  [1m[36m (123.7ms)[0m  [1mcommit transaction[0m
+Migrating to SplitsContentRulesArticlesPages (99)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSplitsContentRulesArticlesPages::Profile Load (0.3ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."label" = 'admin' LIMIT 1[0m
+  [1m[35mSplitsContentRulesArticlesPages::Profile Load (0.2ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."label" = 'publisher' LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('99')[0m
+  [1m[35m (93.8ms)[0m  commit transaction
+Migrating to AddsContentSettings (100)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  CREATE TEMPORARY TABLE "altered_contents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "type" varchar(255), "title" varchar(255), "author" varchar(255), "body" text, "extended" text, "excerpt" text, "created_at" datetime, "updated_at" datetime, "user_id" integer, "permalink" varchar(255), "guid" varchar(255), "text_filter_id" integer, "whiteboard" text, "name" varchar(255), "published" boolean DEFAULT 'f', "allow_pings" boolean, "allow_comments" boolean, "published_at" datetime, "state" varchar(255), "parent_id" integer, "s_password" varchar(255)) 
+  [1m[36m (0.3ms)[0m  [1mCREATE INDEX "temp_index_altered_contents_on_text_filter_id" ON "altered_contents" ("text_filter_id")[0m
+  [1m[35m (0.4ms)[0m  CREATE INDEX "temp_index_altered_contents_on_published" ON "altered_contents" ("published")
+  [1m[36m (0.3ms)[0m  [1mSELECT * FROM "contents"[0m
+  [1m[35m (0.6ms)[0m  DROP TABLE "contents"
+  [1m[36m (0.7ms)[0m  [1mCREATE TABLE "contents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "type" varchar(255), "title" varchar(255), "author" varchar(255), "body" text, "extended" text, "excerpt" text, "created_at" datetime, "updated_at" datetime, "user_id" integer, "permalink" varchar(255), "guid" varchar(255), "text_filter_id" integer, "whiteboard" text, "name" varchar(255), "published" boolean DEFAULT 'f', "allow_pings" boolean, "allow_comments" boolean, "published_at" datetime, "state" varchar(255), "parent_id" integer, "s_password" varchar(255)) [0m
+  [1m[35m (0.4ms)[0m  CREATE INDEX "index_contents_on_published" ON "contents" ("published")
+  [1m[36m (0.3ms)[0m  [1mCREATE INDEX "index_contents_on_text_filter_id" ON "contents" ("text_filter_id")[0m
+  [1m[35m (0.2ms)[0m  SELECT * FROM "altered_contents"
+  [1m[36m (0.4ms)[0m  [1mDROP TABLE "altered_contents"[0m
+  [1m[35m (0.7ms)[0m  ALTER TABLE "contents" ADD "settings" text
+  [1m[36mAddsContentSettings::BareContent Load (0.3ms)[0m  [1mSELECT "contents".* FROM "contents" [0m
+  [1m[35m (0.6ms)[0m  CREATE TEMPORARY TABLE "altered_contents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "type" varchar(255), "title" varchar(255), "author" varchar(255), "body" text, "extended" text, "excerpt" text, "created_at" datetime, "updated_at" datetime, "user_id" integer, "permalink" varchar(255), "guid" varchar(255), "text_filter_id" integer, "whiteboard" text, "name" varchar(255), "published" boolean DEFAULT 'f', "allow_pings" boolean, "allow_comments" boolean, "published_at" datetime, "state" varchar(255), "parent_id" integer, "s_password" varchar(255), "settings" text) 
+  [1m[36m (0.4ms)[0m  [1mCREATE INDEX "temp_index_altered_contents_on_text_filter_id" ON "altered_contents" ("text_filter_id")[0m
+  [1m[35m (0.3ms)[0m  CREATE INDEX "temp_index_altered_contents_on_published" ON "altered_contents" ("published")
+  [1m[36m (0.3ms)[0m  [1mSELECT * FROM "contents"[0m
+  [1m[35m (0.7ms)[0m  DROP TABLE "contents"
+  [1m[36m (0.7ms)[0m  [1mCREATE TABLE "contents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "type" varchar(255), "title" varchar(255), "author" varchar(255), "body" text, "extended" text, "excerpt" text, "created_at" datetime, "updated_at" datetime, "user_id" integer, "permalink" varchar(255), "guid" varchar(255), "text_filter_id" integer, "whiteboard" text, "name" varchar(255), "published" boolean DEFAULT 'f', "allow_pings" boolean, "allow_comments" boolean, "published_at" datetime, "state" varchar(255), "parent_id" integer, "settings" text) [0m
+  [1m[35m (0.4ms)[0m  CREATE INDEX "index_contents_on_published" ON "contents" ("published")
+  [1m[36m (0.3ms)[0m  [1mCREATE INDEX "index_contents_on_text_filter_id" ON "contents" ("text_filter_id")[0m
+  [1m[35m (0.2ms)[0m  SELECT * FROM "altered_contents"
+  [1m[36m (0.4ms)[0m  [1mDROP TABLE "altered_contents"[0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('100')
+  [1m[36m (83.1ms)[0m  [1mcommit transaction[0m
+Migrating to AddsContentType (101)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (1.0ms)[0m  [1mALTER TABLE "contents" ADD "post_type" varchar(255) DEFAULT 'read'[0m
+  [1m[35m (0.5ms)[0m  CREATE TABLE "post_types" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "permalink" varchar(255), "description" varchar(255)) 
+  [1m[36m (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('101')[0m
+  [1m[35m (95.6ms)[0m  commit transaction
+Migrating to FixesExistingArticlesWithNoType (102)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mFixesExistingArticlesWithNoType::Article Load (0.5ms)[0m  SELECT "contents".* FROM "contents" WHERE "contents"."type" IN ('FixesExistingArticlesWithNoType::Article')
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('102')[0m
+  [1m[35m (117.4ms)[0m  commit transaction
+Migrating to ReallyUpdateExistingArticlesWithNilOrEmptyPostType (103)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mReallyUpdateExistingArticlesWithNilOrEmptyPostType::Content Load (0.5ms)[0m  SELECT "contents".* FROM "contents" WHERE (type = 'Article')
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('103')[0m
+  [1m[35m (195.7ms)[0m  commit transaction
+Migrating to AddsCreatedAtToRedirects (104)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.9ms)[0m  ALTER TABLE "redirects" ADD "created_at" datetime
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "redirects" ADD "updated_at" datetime[0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('104')
+  [1m[36m (78.1ms)[0m  [1mcommit transaction[0m
+Migrating to RemoveNotificationsTable (105)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mDROP TABLE "notifications"[0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('105')
+  [1m[36m (97.6ms)[0m  [1mcommit transaction[0m
+Migrating to RemoveRightsTable (106)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mDROP TABLE "rights"[0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('106')
+  [1m[36m (108.6ms)[0m  [1mcommit transaction[0m
+Migrating to AddsResourcesUpload (107)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mCREATE TEMPORARY TABLE "altered_resources" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "size" integer, "upload" varchar(255), "mime" varchar(255), "created_at" datetime, "updated_at" datetime, "article_id" integer, "itunes_metadata" boolean, "itunes_author" varchar(255), "itunes_subtitle" varchar(255), "itunes_duration" integer, "itunes_summary" text, "itunes_keywords" varchar(255), "itunes_category" varchar(255), "itunes_explicit" boolean) [0m
+  [1m[35m (0.2ms)[0m  SELECT * FROM "resources"
+  [1m[36m (0.4ms)[0m  [1mDROP TABLE "resources"[0m
+  [1m[35m (0.7ms)[0m  CREATE TABLE "resources" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "size" integer, "upload" varchar(255), "mime" varchar(255), "created_at" datetime, "updated_at" datetime, "article_id" integer, "itunes_metadata" boolean, "itunes_author" varchar(255), "itunes_subtitle" varchar(255), "itunes_duration" integer, "itunes_summary" text, "itunes_keywords" varchar(255), "itunes_category" varchar(255), "itunes_explicit" boolean) 
+  [1m[36m (0.2ms)[0m  [1mSELECT * FROM "altered_resources"[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "altered_resources"
+  [1m[36mAddsResourcesUpload::Resource Load (0.2ms)[0m  [1mSELECT "resources".* FROM "resources" ORDER BY "resources"."id" ASC LIMIT 1000[0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('107')
+  [1m[36m (179.1ms)[0m  [1mcommit transaction[0m
+Migrating to AddsFeedbackUseragent (108)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (1.0ms)[0m  [1mALTER TABLE "feedback" ADD "user_agent" varchar(255)[0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('108')
+  [1m[36m (97.0ms)[0m  [1mcommit transaction[0m
+Migrating to DropsTypoReferencesForPublify (109)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mBlog Load (0.3ms)[0m  [1mSELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1[0m
+  [1m[35mDropsTypoReferencesForPublify::Article Load (0.3ms)[0m  SELECT "contents".* FROM "contents" WHERE "contents"."type" IN ('DropsTypoReferencesForPublify::Article')
+  [1m[36mDropsTypoReferencesForPublify::Page Load (0.3ms)[0m  [1mSELECT "contents".* FROM "contents" WHERE "contents"."type" IN ('DropsTypoReferencesForPublify::Page')[0m
+  [1m[35mFeedback Load (0.3ms)[0m  SELECT "feedback".* FROM "feedback" ORDER BY created_at DESC
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('109')[0m
+  [1m[35m (88.5ms)[0m  commit transaction
+Migrating to AddsStatusesRules (110)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mAddsStatusesRules::Profile Load (0.3ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."label" = 'admin' LIMIT 1
+  [1m[36mAddsStatusesRules::Profile Load (0.2ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."label" = 'publisher' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('110')
+  [1m[36m (104.6ms)[0m  [1mcommit transaction[0m
+Migrating to MovesStatusesToNotes (111)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mMovesStatusesToNotes::Profile Load (0.3ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."label" = 'admin' LIMIT 1[0m
+  [1m[35mMovesStatusesToNotes::Profile Load (0.2ms)[0m  SELECT "profiles".* FROM "profiles" WHERE "profiles"."label" = 'publisher' LIMIT 1
+  [1m[36mMovesStatusesToNotes::Content Load (0.3ms)[0m  [1mSELECT "contents".* FROM "contents" WHERE (type = 'Status')[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('111')
+  [1m[36m (191.2ms)[0m  [1mcommit transaction[0m
+Migrating to FixesNotesRedirects (112)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mNote Load (0.5ms)[0m  [1mSELECT "contents".* FROM "contents" WHERE "contents"."type" IN ('Note') ORDER BY published_at DESC[0m
+  [1m[35m (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('112')
+  [1m[36m (82.8ms)[0m  [1mcommit transaction[0m
+Migrating to AddsUserAvatar (113)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (1.0ms)[0m  [1mALTER TABLE "users" ADD "resource_id" integer[0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('113')
+  [1m[36m (97.7ms)[0m  [1mcommit transaction[0m
+Migrating to FixesBuggyArticlesAndNotes (114)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mContent Load (0.5ms)[0m  [1mSELECT "contents".* FROM "contents" WHERE (permalink is NULL or permalink = '')[0m
+  [1m[35mNote Load (0.5ms)[0m  SELECT "contents".* FROM "contents" WHERE "contents"."type" IN ('Note') AND (guid is NULL or guid = '') ORDER BY published_at DESC
+  [1m[36m (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('114')[0m
+  [1m[35m (105.9ms)[0m  commit transaction
+Migrating to DropsCategoriesForTags (115)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mDropsCategoriesForTags::Category Load (0.2ms)[0m  SELECT "categories".* FROM "categories" ORDER BY name ASC
+  [1m[36m (0.5ms)[0m  [1mDROP TABLE "categorizations"[0m
+  [1m[35m (0.5ms)[0m  DROP TABLE "categories"
+  [1m[36m (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('115')[0m
+  [1m[35m (106.6ms)[0m  commit transaction
+  [1m[36m (0.3ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Connecting to database specified by database.yml
+Creating scope :published_at. Overwriting existing method Article.published_at.
+Creating scope :spam. Overwriting existing method Comment.spam.
+Creating scope :presumed_spam. Overwriting existing method Comment.presumed_spam.
+Creating scope :presumed_ham. Overwriting existing method Comment.presumed_ham.
+Creating scope :ham. Overwriting existing method Comment.ham.
+
+
+Started GET "/" for 127.0.0.1 at 2014-03-24 01:21:16 +0300
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1[0m
+Processing by ArticlesController#index as HTML
+  [1m[35mTrigger Load (0.2ms)[0m  SELECT "triggers".* FROM "triggers" WHERE (due_at <= '2014-03-23 22:21:17.416440')
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1[0m
+Completed 500 Internal Server Error in 691.6ms
+
+NoMethodError (undefined method `lang' for nil:NilClass):
+  app/controllers/application_controller.rb:38:in `load_lang'
+
+
+  Rendered /home/danogwok/.rvm/gems/ruby-1.9.3-p392/gems/actionpack-3.2.17/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.2ms)
+  Rendered /home/danogwok/.rvm/gems/ruby-1.9.3-p392/gems/actionpack-3.2.17/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.9ms)
+  Rendered /home/danogwok/.rvm/gems/ruby-1.9.3-p392/gems/actionpack-3.2.17/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (20.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-03-24 01:21:21 +0300
+Processing by ArticlesController#index as HTML
+  [1m[35mTrigger Load (0.4ms)[0m  SELECT "triggers".* FROM "triggers" WHERE (due_at <= '2014-03-23 22:21:21.839847')
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1[0m
+Completed 500 Internal Server Error in 3.2ms
+
+NoMethodError (undefined method `lang' for nil:NilClass):
+  app/controllers/application_controller.rb:38:in `load_lang'
+
+
+  Rendered /home/danogwok/.rvm/gems/ruby-1.9.3-p392/gems/actionpack-3.2.17/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.4ms)
+  Rendered /home/danogwok/.rvm/gems/ruby-1.9.3-p392/gems/actionpack-3.2.17/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.8ms)
+  Rendered /home/danogwok/.rvm/gems/ruby-1.9.3-p392/gems/actionpack-3.2.17/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (13.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-03-24 01:21:22 +0300
+Processing by ArticlesController#index as HTML
+  [1m[35mTrigger Load (0.3ms)[0m  SELECT "triggers".* FROM "triggers" WHERE (due_at <= '2014-03-23 22:21:22.949919')
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1[0m
+Completed 500 Internal Server Error in 3.2ms
+
+NoMethodError (undefined method `lang' for nil:NilClass):
+  app/controllers/application_controller.rb:38:in `load_lang'
+
+
+  Rendered /home/danogwok/.rvm/gems/ruby-1.9.3-p392/gems/actionpack-3.2.17/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.2ms)
+  Rendered /home/danogwok/.rvm/gems/ruby-1.9.3-p392/gems/actionpack-3.2.17/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.7ms)
+  Rendered /home/danogwok/.rvm/gems/ruby-1.9.3-p392/gems/actionpack-3.2.17/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (13.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-03-24 01:21:23 +0300
+Processing by ArticlesController#index as HTML
+  [1m[35mTrigger Load (0.3ms)[0m  SELECT "triggers".* FROM "triggers" WHERE (due_at <= '2014-03-23 22:21:23.701698')
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1[0m
+Completed 500 Internal Server Error in 3.3ms
+
+NoMethodError (undefined method `lang' for nil:NilClass):
+  app/controllers/application_controller.rb:38:in `load_lang'
+
+
+  Rendered /home/danogwok/.rvm/gems/ruby-1.9.3-p392/gems/actionpack-3.2.17/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.1ms)
+  Rendered /home/danogwok/.rvm/gems/ruby-1.9.3-p392/gems/actionpack-3.2.17/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.8ms)
+  Rendered /home/danogwok/.rvm/gems/ruby-1.9.3-p392/gems/actionpack-3.2.17/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (13.1ms)
+Connecting to database specified by database.yml
+Creating scope :published_at. Overwriting existing method Article.published_at.
+Creating scope :spam. Overwriting existing method Comment.spam.
+Creating scope :presumed_spam. Overwriting existing method Comment.presumed_spam.
+Creating scope :presumed_ham. Overwriting existing method Comment.presumed_ham.
+Creating scope :ham. Overwriting existing method Comment.ham.
+  [1m[36m (3.9ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "blogs" [0m
+  [1m[35mSQL (79.1ms)[0m  INSERT INTO "blogs" ("base_url", "settings") VALUES (?, ?)  [["base_url", nil], ["settings", "--- {}\n"]]
+  [1m[36m (163.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mTag Exists (0.4ms)[0m  [1mSELECT 1 AS one FROM "tags" WHERE "tags"."name" = 'general' LIMIT 1[0m
+  [1m[35mSQL (22.2ms)[0m  INSERT INTO "tags" ("created_at", "display_name", "name", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", Sun, 23 Mar 2014 22:21:50 UTC +00:00], ["display_name", "General"], ["name", "general"], ["updated_at", Sun, 23 Mar 2014 22:21:50 UTC +00:00]]
+  [1m[36m (96.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "sidebars" ("active_position", "config", "staged_position", "type") VALUES (?, ?, ?, ?)[0m  [["active_position", 0], ["config", "---\nmaximum_pages: 10\n"], ["staged_position", 0], ["type", "PageSidebar"]]
+  [1m[35m (94.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "sidebars" ("active_position", "config", "staged_position", "type") VALUES (?, ?, ?, ?)  [["active_position", 1], ["config", "---\nmaximum_tags: 20\n"], ["staged_position", nil], ["type", "TagSidebar"]]
+  [1m[36m (95.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "sidebars" ("active_position", "config", "staged_position", "type") VALUES (?, ?, ?, ?)[0m  [["active_position", 2], ["config", "---\ntitle: Archives\nshow_count: true\ncount: 10\n"], ["staged_position", nil], ["type", "ArchivesSidebar"]]
+  [1m[35m (109.5ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "sidebars" ("active_position", "config", "staged_position", "type") VALUES (?, ?, ?, ?)  [["active_position", 3], ["config", "---\ntitle: Links\nbody: ! \"\\n<ul>\\n  <li><a href=\\\"http://www.publify.co\\\" title=\\\"Publify\\\">Publify</a></li>\\n\n  \\ <li><a href=\\\"http://t37.net\\\" title=\\\"Le Rayon UX\\\">Frédéric</a></li>\\n  <li><a\n  href=\\\"http://www.matijs.net/\\\" title=\\\"Matijs\\\">Matijs</a></li>\\n  <li><a href=\\\"http://elsif.fr\\\"\n  title=\\\"Yannick\\\">Yannick</a></li>\\n  <li><a href=\\\"http://blog.ookook.fr\\\" title=\\\"Thomas\\\">Thomas</a></li>\\n\n  \\ <li><a href=\\\"/admin\\\">Admin</a></li>\\n</ul>\\n\"\n"], ["staged_position", nil], ["type", "StaticSidebar"]]
+  [1m[36m (104.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "sidebars" ("active_position", "config", "staged_position", "type") VALUES (?, ?, ?, ?)[0m  [["active_position", 4], ["config", "---\ntitle: Meta\n"], ["staged_position", nil], ["type", "MetaSidebar"]]
+  [1m[35m (95.4ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "text_filters" ("description", "filters", "markup", "name", "params") VALUES (?, ?, ?, ?, ?)  [["description", "None"], ["filters", "--- []\n"], ["markup", "none"], ["name", "none"], ["params", "--- {}\n"]]
+  [1m[36m (96.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "text_filters" ("description", "filters", "markup", "name", "params") VALUES (?, ?, ?, ?, ?)[0m  [["description", "Markdown"], ["filters", "--- []\n"], ["markup", "markdown"], ["name", "markdown"], ["params", "--- {}\n"]]
+  [1m[35m (98.3ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "text_filters" ("description", "filters", "markup", "name", "params") VALUES (?, ?, ?, ?, ?)  [["description", "SmartyPants"], ["filters", "---\n- :smartypants\n"], ["markup", "none"], ["name", "smartypants"], ["params", "--- {}\n"]]
+  [1m[36m (110.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "text_filters" ("description", "filters", "markup", "name", "params") VALUES (?, ?, ?, ?, ?)[0m  [["description", "Markdown with SmartyPants"], ["filters", "---\n- :smartypants\n"], ["markup", "markdown"], ["name", "markdown smartypants"], ["params", "--- {}\n"]]
+  [1m[35m (255.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "text_filters" ("description", "filters", "markup", "name", "params") VALUES (?, ?, ?, ?, ?)  [["description", "Textile"], ["filters", "--- []\n"], ["markup", "textile"], ["name", "textile"], ["params", "--- {}\n"]]
+  [1m[36m (99.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mProfile Exists (0.2ms)[0m  [1mSELECT 1 AS one FROM "profiles" WHERE "profiles"."label" = 'admin' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "profiles" ("label", "modules", "nicename") VALUES (?, ?, ?)  [["label", "admin"], ["modules", "---\n- :dashboard\n- :articles\n- :notes\n- :pages\n- :feedback\n- :media\n- :themes\n- :sidebar\n- :profile\n- :users\n- :settings\n- :seo\n"], ["nicename", "Publify administrator"]]
+  [1m[36m (90.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mProfile Exists (0.4ms)[0m  [1mSELECT 1 AS one FROM "profiles" WHERE "profiles"."label" = 'publisher' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "profiles" ("label", "modules", "nicename") VALUES (?, ?, ?)  [["label", "publisher"], ["modules", "---\n- :dashboard\n- :articles\n- :notes\n- :pages\n- :feedback\n- :media\n- :profile\n"], ["nicename", "Blog publisher"]]
+  [1m[36m (107.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mProfile Exists (0.2ms)[0m  [1mSELECT 1 AS one FROM "profiles" WHERE "profiles"."label" = 'contributor' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "profiles" ("label", "modules", "nicename") VALUES (?, ?, ?)  [["label", "contributor"], ["modules", "---\n- :dashboard\n- :profile\n"], ["nicename", "Contributor"]]
+  [1m[36m (232.1ms)[0m  [1mcommit transaction[0m
+
+
+Started GET "/" for 127.0.0.1 at 2014-03-24 01:21:54 +0300
+Processing by ArticlesController#index as HTML
+  [1m[35mTrigger Load (0.3ms)[0m  SELECT "triggers".* FROM "triggers" WHERE (due_at <= '2014-03-23 22:21:54.574013')
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1[0m
+Redirected to http://localhost:3000/setup
+Filter chain halted as :verify_config rendered or redirected
+Completed 302 Found in 94.2ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/setup" for 127.0.0.1 at 2014-03-24 01:21:54 +0300
+Processing by SetupController#index as HTML
+  [1m[35mTrigger Load (0.3ms)[0m  SELECT "triggers".* FROM "triggers" WHERE (due_at <= '2014-03-23 22:21:54.696781')
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1[0m
+  Rendered setup/index.html.erb within layouts/accounts (4.2ms)
+  Rendered shared/_flash.erb (1.1ms)
+Completed 200 OK in 67.6ms (Views: 62.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/accounts.css" for 127.0.0.1 at 2014-03-24 01:21:54 +0300
+Compiled accounts.css  (0ms)  (pid 4672)
+Served asset /accounts.css - 200 OK (23ms)
+
+
+Started GET "/assets/bootstrap.css" for 127.0.0.1 at 2014-03-24 01:21:54 +0300
+Compiled bootstrap.css  (1ms)  (pid 4672)
+Served asset /bootstrap.css - 200 OK (98ms)
+
+
+Started GET "/assets/publify_admin.js" for 127.0.0.1 at 2014-03-24 01:21:54 +0300
+Compiled jquery.js  (3ms)  (pid 4672)
+Compiled jquery_ujs.js  (0ms)  (pid 4672)
+Compiled jquery.ui.core.js  (0ms)  (pid 4672)
+Compiled jquery.ui.widget.js  (0ms)  (pid 4672)
+Compiled jquery.ui.accordion.js  (102ms)  (pid 4672)
+Compiled jquery.ui.position.js  (0ms)  (pid 4672)
+Compiled jquery.ui.menu.js  (146ms)  (pid 4672)
+Compiled jquery.ui.autocomplete.js  (163ms)  (pid 4672)
+Compiled jquery.ui.button.js  (4ms)  (pid 4672)
+Compiled jquery.ui.datepicker.js  (3ms)  (pid 4672)
+Compiled jquery.ui.mouse.js  (3ms)  (pid 4672)
+Compiled jquery.ui.draggable.js  (19ms)  (pid 4672)
+Compiled jquery.ui.resizable.js  (6ms)  (pid 4672)
+Compiled jquery.ui.dialog.js  (53ms)  (pid 4672)
+Compiled jquery.ui.droppable.js  (7ms)  (pid 4672)
+Compiled jquery.ui.effect.js  (0ms)  (pid 4672)
+Compiled jquery.ui.effect-blind.js  (12ms)  (pid 4672)
+Compiled jquery.ui.effect-bounce.js  (2ms)  (pid 4672)
+Compiled jquery.ui.effect-clip.js  (2ms)  (pid 4672)
+Compiled jquery.ui.effect-drop.js  (2ms)  (pid 4672)
+Compiled jquery.ui.effect-explode.js  (2ms)  (pid 4672)
+Compiled jquery.ui.effect-fade.js  (2ms)  (pid 4672)
+Compiled jquery.ui.effect-fold.js  (2ms)  (pid 4672)
+Compiled jquery.ui.effect-highlight.js  (2ms)  (pid 4672)
+Compiled jquery.ui.effect-pulsate.js  (2ms)  (pid 4672)
+Compiled jquery.ui.effect-scale.js  (2ms)  (pid 4672)
+Compiled jquery.ui.effect-shake.js  (2ms)  (pid 4672)
+Compiled jquery.ui.effect-slide.js  (2ms)  (pid 4672)
+Compiled jquery.ui.effect-transfer.js  (2ms)  (pid 4672)
+Compiled jquery.ui.progressbar.js  (4ms)  (pid 4672)
+Compiled jquery.ui.selectable.js  (5ms)  (pid 4672)
+Compiled jquery.ui.slider.js  (88ms)  (pid 4672)
+Compiled jquery.ui.sortable.js  (6ms)  (pid 4672)
+Compiled jquery.ui.spinner.js  (5ms)  (pid 4672)
+Compiled jquery.ui.tabs.js  (4ms)  (pid 4672)
+Compiled jquery.ui.tooltip.js  (5ms)  (pid 4672)
+Compiled jquery.ui.all.js  (999ms)  (pid 4672)
+Compiled bootstrap.js  (0ms)  (pid 4672)
+Compiled publify_jquery.js  (0ms)  (pid 4672)
+Compiled administration_jquery.js  (0ms)  (pid 4672)
+Compiled quicktags.js  (0ms)  (pid 4672)
+Compiled widearea.js  (0ms)  (pid 4672)
+Compiled tagmanager.js  (0ms)  (pid 4672)
+Compiled typeahead.js  (1ms)  (pid 4672)
+Compiled admin_publify.js  (0ms)  (pid 4672)
+Compiled sidebar.js  (0ms)  (pid 4672)
+Compiled publify_admin.js  (1194ms)  (pid 4672)
+Served asset /publify_admin.js - 200 OK (1304ms)
+
+
+Started POST "/setup" for 127.0.0.1 at 2014-03-24 01:22:08 +0300
+Processing by SetupController#index as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"R2arNltRdtoc8beain1TshRZs/SlywhK/RDz3y5iDLg=", "setting"=>{"blog_name"=>"Daniel Ogwok", "email"=>"danogwok@gmail.com"}}
+  [1m[35mTrigger Load (0.3ms)[0m  SELECT "triggers".* FROM "triggers" WHERE (due_at <= '2014-03-23 22:22:08.989383')
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "users" 
+  [1m[36mProfile Load (0.2ms)[0m  [1mSELECT "profiles".* FROM "profiles" WHERE "profiles"."label" = 'admin' LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."login" = 'admin' LIMIT 1
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'danogwok@gmail.com' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mUPDATE "blogs" SET "base_url" = 'http://localhost:3000', "settings" = '---
+blog_name: Daniel Ogwok
+' WHERE "blogs"."id" = 1[0m
+  [1m[35m (176.9ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."login" = 'admin' LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'danogwok@gmail.com' LIMIT 1[0m
+  [1m[35mBlog Load (0.3ms)[0m  SELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1
+  Rendered notification_mailer/_mail_header.html.erb (0.5ms)
+  Rendered notification_mailer/notif_user.html.erb (2.8ms)
+
+Sent mail to danogwok@gmail.com (45889.5ms)
+Date: Mon, 24 Mar 2014 01:22:09 +0300
+From: publify@example.com
+To: danogwok@gmail.com
+Message-ID: <532f5e91c03dd_124090caa46353c@linux-l8gm.site.mail>
+Subject: [Daniel Ogwok] Welcome to Publify
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=utf-8
+Content-Transfer-Encoding: 7bit
+X-Mailer: Publify 8.0.0
+
+<html>
+<body>
+  <p>Your <a href="http://localhost:3000">Daniel Ogwok</a> account has been created.</p>
+
+  <div style="margin:1em;padding:4px;background:#eee;border:1px solid black">
+
+    <p>Your credentials appear below.</p>
+
+    <ul>
+      <li>Login: admin</li>
+      <li>Password: t48MAv3</li>
+    </ul>
+  </div>
+</body>
+</html>
+
+Binary data inserted for `string` type on column `password`
+  [1m[36mSQL (0.9ms)[0m  [1mINSERT INTO "users" ("email", "last_connection", "login", "name", "notify_on_comments", "notify_on_new_articles", "notify_via_email", "password", "profile_id", "remember_token", "remember_token_expires_at", "resource_id", "settings", "state", "text_filter_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["email", "danogwok@gmail.com"], ["last_connection", nil], ["login", "admin"], ["name", "admin"], ["notify_on_comments", nil], ["notify_on_new_articles", nil], ["notify_via_email", nil], ["password", "d9657f0fea82beee21daf8504967ecc8e4845a74"], ["profile_id", 1], ["remember_token", nil], ["remember_token_expires_at", nil], ["resource_id", nil], ["settings", "---\nnickname: Publify Admin\n"], ["state", "active"], ["text_filter_id", "1"]]
+  [1m[35m (151.7ms)[0m  commit transaction
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "users" [0m
+  [1m[35mArticle Load (0.4ms)[0m  SELECT "contents".* FROM "contents" WHERE "contents"."type" IN ('Article') LIMIT 1
+  [1m[36mTag Load (0.2ms)[0m  [1mSELECT "tags".* FROM "tags" LIMIT 1[0m
+#<Article:0x00000005808c70> leaving state Article::States::New
+#<Article:0x00000005808c70> entering state Article::States::JustPublished
+#<Article:0x00000005808c70> leaving state Article::States::JustPublished
+#<Article:0x00000005808c70> entering state Article::States::Published
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mArticle Exists (0.3ms)[0m  [1mSELECT 1 AS one FROM "contents" WHERE "contents"."type" IN ('Article') AND "contents"."guid" IS NULL LIMIT 1[0m
+  [1m[35mSQL (3.9ms)[0m  INSERT INTO "contents" ("allow_comments", "allow_pings", "author", "body", "created_at", "excerpt", "extended", "guid", "name", "parent_id", "permalink", "post_type", "published", "published_at", "settings", "state", "text_filter_id", "title", "type", "updated_at", "user_id", "whiteboard") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["allow_comments", true], ["allow_pings", true], ["author", "admin"], ["body", "Welcome to Publify. This is your first article. Edit or delete it, then start blogging!"], ["created_at", Sun, 23 Mar 2014 22:22:56 UTC +00:00], ["excerpt", nil], ["extended", nil], ["guid", "0c086532-e7e1-4814-8683-27ab9bb3ba6e"], ["name", nil], ["parent_id", nil], ["permalink", "hello-world"], ["post_type", "read"], ["published", true], ["published_at", Sun, 23 Mar 2014 22:22:56 UTC +00:00], ["settings", "--- {}\n"], ["state", "published"], ["text_filter_id", nil], ["title", "Hello World!"], ["type", "Article"], ["updated_at", Sun, 23 Mar 2014 22:22:56 UTC +00:00], ["user_id", 1], ["whiteboard", nil]]
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "articles_tags" ("article_id", "tag_id") VALUES (1, 1)[0m
+  [1m[35mRedirect Load (0.3ms)[0m  SELECT "redirects".* FROM "redirects" WHERE "redirects"."from_path" = 'bFxlIS' LIMIT 1
+  [1m[36mBlog Load (0.1ms)[0m  [1mSELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1[0m
+  [1m[35mRedirect Load (0.2ms)[0m  SELECT "redirects".* FROM "redirects" INNER JOIN "redirections" ON "redirects"."id" = "redirections"."redirect_id" WHERE "redirections"."content_id" = 1 LIMIT 1
+  [1m[36mRedirect Exists (0.2ms)[0m  [1mSELECT 1 AS one FROM "redirects" WHERE "redirects"."from_path" = 'bFxlIS' LIMIT 1[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "redirects" ("created_at", "from_path", "origin", "to_path", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", Sun, 23 Mar 2014 22:22:56 UTC +00:00], ["from_path", "bFxlIS"], ["origin", nil], ["to_path", "http://localhost:3000/2014/03/23/hello-world"], ["updated_at", Sun, 23 Mar 2014 22:22:56 UTC +00:00]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "redirections" ("content_id", "redirect_id") VALUES (?, ?)[0m  [["content_id", 1], ["redirect_id", 1]]
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users" WHERE "users"."notify_on_new_articles" = 't'
+  [1m[36mPing Load (0.2ms)[0m  [1mSELECT "pings".* FROM "pings" WHERE "pings"."article_id" = 1 ORDER BY created_at ASC[0m
+  [1m[35mArticle Load (0.5ms)[0m  SELECT "contents".* FROM "contents" WHERE "contents"."type" IN ('Article') AND "contents"."id" = 1 LIMIT 1
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "contents".* FROM "contents" WHERE "contents"."type" IN ('Article') AND "contents"."id" = 1 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "contents".* FROM "contents" WHERE "contents"."type" IN ('Article') AND "contents"."id" = 1 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "contents".* FROM "contents" WHERE "contents"."type" IN ('Article') AND "contents"."id" = 1 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1[0m
+  [1m[35mTextFilter Load (0.2ms)[0m  SELECT "text_filters".* FROM "text_filters" WHERE "text_filters"."name" = 'markdown smartypants' LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1[0m
+  [1m[35m (85.5ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPage Exists (0.3ms)[0m  SELECT 1 AS one FROM "contents" WHERE "contents"."type" IN ('Page') AND "contents"."name" = 'about' LIMIT 1
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "contents" ("allow_comments", "allow_pings", "author", "body", "created_at", "excerpt", "extended", "guid", "name", "parent_id", "permalink", "post_type", "published", "published_at", "settings", "state", "text_filter_id", "title", "type", "updated_at", "user_id", "whiteboard") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["allow_comments", nil], ["allow_pings", nil], ["author", nil], ["body", "This is an example of a Publify page. You can edit this to write information about yourself or your site so readers know who you are. You can create as many pages as this one as you like and manage all of your content inside Publify."], ["created_at", Sun, 23 Mar 2014 22:22:57 UTC +00:00], ["excerpt", nil], ["extended", nil], ["guid", nil], ["name", "about"], ["parent_id", nil], ["permalink", nil], ["post_type", "read"], ["published", true], ["published_at", nil], ["settings", "--- {}\n"], ["state", nil], ["text_filter_id", nil], ["title", "About"], ["type", "Page"], ["updated_at", Sun, 23 Mar 2014 22:22:57 UTC +00:00], ["user_id", 1], ["whiteboard", nil]]
+  [1m[35mRedirect Load (0.3ms)[0m  SELECT "redirects".* FROM "redirects" WHERE "redirects"."from_path" = 'orlERL' LIMIT 1
+  [1m[36mBlog Load (0.1ms)[0m  [1mSELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1[0m
+  [1m[35mRedirect Load (0.2ms)[0m  SELECT "redirects".* FROM "redirects" INNER JOIN "redirections" ON "redirects"."id" = "redirections"."redirect_id" WHERE "redirections"."content_id" = 2 LIMIT 1
+  [1m[36mRedirect Exists (0.1ms)[0m  [1mSELECT 1 AS one FROM "redirects" WHERE "redirects"."from_path" = 'orlERL' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "redirects" ("created_at", "from_path", "origin", "to_path", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", Sun, 23 Mar 2014 22:22:57 UTC +00:00], ["from_path", "orlERL"], ["origin", nil], ["to_path", "http://localhost:3000/pages/about"], ["updated_at", Sun, 23 Mar 2014 22:22:57 UTC +00:00]]
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "redirections" ("content_id", "redirect_id") VALUES (?, ?)[0m  [["content_id", 2], ["redirect_id", 2]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1
+  [1m[36m (94.5ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/accounts/confirm
+Completed 302 Found in 48645.5ms (ActiveRecord: 528.2ms)
