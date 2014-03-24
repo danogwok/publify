@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 ruby '1.9.3'
 
 gem 'pg'
+gem 'sass-rails',   '~> 3.2.6'
 gem 'rails', '~> 3.2.13'
 gem 'thin'
 gem 'require_relative'
@@ -24,6 +25,7 @@ gem 'recaptcha', :require => 'recaptcha/rails', :branch => 'rails3'
 gem 'carrierwave'
 gem 'akismet', '~> 1.0'
 gem 'twitter'
+
 
 gem "jquery-rails", "~> 3.0.4"
 gem "jquery-ui-rails", "~> 4.0.4"
