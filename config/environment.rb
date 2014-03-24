@@ -24,7 +24,8 @@ Publify::Application.initialize!
 #     :username => 'danogwok', 
 # 	:password => 'password' 
 #   }
-
+# config.action_mailer.delivery_method = :smtp
+#  config.action_mailer.smtp_settings = {
 # ActionMailer::Base.delivery_method = :sendmail
  ActionMailer::Base.delivery_method = :smtp
  # config.action_mailer.delivery_method = :smtp
