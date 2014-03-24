@@ -1,7 +1,7 @@
 # Load the rails application
 require File.expand_path('../application', __FILE__)
 
-require “smtp_tls”
+require 'smtp_tls'
 
 # Initialize the rails application
 Publify::Application.initialize!
