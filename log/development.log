@@ -1913,3 +1913,128 @@ Processing by ThemeController#images as HTML
   [1m[35mBlog Load (0.1ms)[0m  SELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1
 Sent file /home/danogwok/projects/danogwok/themes/bootstrap/images/header-menu.png (0.1ms)
 Completed 200 OK in 3.5ms (ActiveRecord: 0.3ms)
+Connecting to database specified by database.yml
+Creating scope :published_at. Overwriting existing method Article.published_at.
+Creating scope :spam. Overwriting existing method Comment.spam.
+Creating scope :presumed_spam. Overwriting existing method Comment.presumed_spam.
+Creating scope :presumed_ham. Overwriting existing method Comment.presumed_ham.
+Creating scope :ham. Overwriting existing method Comment.ham.
+Connecting to database specified by database.yml
+Creating scope :published_at. Overwriting existing method Article.published_at.
+Creating scope :spam. Overwriting existing method Comment.spam.
+Creating scope :presumed_spam. Overwriting existing method Comment.presumed_spam.
+Creating scope :presumed_ham. Overwriting existing method Comment.presumed_ham.
+Creating scope :ham. Overwriting existing method Comment.ham.
+Connecting to database specified by database.yml
+Creating scope :published_at. Overwriting existing method Article.published_at.
+Creating scope :spam. Overwriting existing method Comment.spam.
+Creating scope :presumed_spam. Overwriting existing method Comment.presumed_spam.
+Creating scope :presumed_ham. Overwriting existing method Comment.presumed_ham.
+Creating scope :ham. Overwriting existing method Comment.ham.
+Connecting to database specified by database.yml
+Creating scope :published_at. Overwriting existing method Article.published_at.
+Creating scope :spam. Overwriting existing method Comment.spam.
+Creating scope :presumed_spam. Overwriting existing method Comment.presumed_spam.
+Creating scope :presumed_ham. Overwriting existing method Comment.presumed_ham.
+Creating scope :ham. Overwriting existing method Comment.ham.
+
+
+Started GET "/" for 127.0.0.1 at 2014-03-24 11:12:38 +0300
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1
+Processing by ArticlesController#index as HTML
+  [1m[36mTrigger Load (0.1ms)[0m  [1mSELECT "triggers".* FROM "triggers" WHERE (due_at <= '2014-03-24 08:12:38.565113')[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "users" [0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(count_column) FROM (SELECT 1 AS count_column FROM "contents" WHERE "contents"."published" = 't' AND ("contents"."published_at" BETWEEN '1970-01-01 00:00:00.000000' AND '2014-03-24 08:12:38.865159') AND (type in ('Article', 'Note')) LIMIT 10 OFFSET 0) subquery_for_count [0m
+  [1m[35mContent Load (0.4ms)[0m  SELECT "contents".* FROM "contents" WHERE "contents"."published" = 't' AND ("contents"."published_at" BETWEEN '1970-01-01 00:00:00.000000' AND '2014-03-24 08:12:38.865159') AND (type in ('Article', 'Note')) ORDER BY published_at DESC LIMIT 10 OFFSET 0
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1[0m
+  [1m[35mTextFilter Load (0.1ms)[0m  SELECT "text_filters".* FROM "text_filters" WHERE "text_filters"."name" = 'markdown smartypants' LIMIT 1
+  Rendered articles/_article_excerpt.html.erb (88.6ms)
+  Rendered articles/_article_content.html.erb (89.8ms)
+  Rendered articles/_protected_article_content.html.erb (91.1ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1[0m
+  [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "articles_tags" ON "tags"."id" = "articles_tags"."tag_id" WHERE "articles_tags"."article_id" = 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1[0m
+  Rendered themes/bootstrap/views/articles/_meta.html.erb (253.7ms)
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "feedback" WHERE "feedback"."type" IN ('Comment') AND "feedback"."article_id" = 1 AND "feedback"."published" = 't'
+  Rendered themes/bootstrap/views/articles/_comment_counter.html.erb (8.6ms)
+  Rendered themes/bootstrap/views/articles/_article.html.erb (360.0ms)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "contents" WHERE "contents"."published" = 't' AND ("contents"."published_at" BETWEEN '1970-01-01 00:00:00.000000' AND '2014-03-24 08:12:38.865159') AND (type in ('Article', 'Note'))[0m
+  Rendered themes/bootstrap/views/articles/index.html.erb within layouts/default.html (551.9ms)
+  Rendered shared/_page_header.html.erb (2.6ms)
+  [1m[35mPage Load (0.4ms)[0m  SELECT "contents".* FROM "contents" WHERE "contents"."type" IN ('Page') AND "contents"."published" = 't' AND ("contents"."published_at" BETWEEN '1970-01-01 00:00:00.000000' AND '2014-03-24 08:12:39.515498') ORDER BY published_at DESC
+  [1m[36mSidebar Load (0.1ms)[0m  [1mSELECT "sidebars".* FROM "sidebars" ORDER BY active_position ASC[0m
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "contents" WHERE "contents"."type" IN ('Page') AND "contents"."published" = 't' AND ("contents"."published_at" BETWEEN '1970-01-01 00:00:00.000000' AND '2014-03-24 08:12:39.557104')
+  Rendered lib/page_sidebar/app/views/page_sidebar/_content.html.erb (2.5ms)
+  [1m[36mTag Load (0.3ms)[0m  [1m
+ SELECT tags.id, tags.name, tags.display_name, COUNT(articles_tags.article_id) AS article_counter
+ FROM tags tags LEFT OUTER JOIN articles_tags articles_tags
+ ON articles_tags.tag_id = tags.id
+ LEFT OUTER JOIN contents articles
+ ON articles_tags.article_id = articles.id
+ WHERE articles.published = 't'
+ GROUP BY tags.id, tags.name, tags.display_name
+ ORDER BY article_counter DESC
+ LIMIT 1000 OFFSET 0
+ [0m
+  Rendered lib/tag_sidebar/app/views/tag_sidebar/_content.html.erb (2.7ms)
+  [1m[35mContent Load (0.3ms)[0m  select count(*) as count, strftime('%Y', published_at) as year, strftime('%m', published_at) as month from contents where type='Article' and published = 't' and published_at < '2014-03-24 08:12:39.564143' group by year,month order by year desc,month desc limit 10 
+  Rendered lib/archives_sidebar/app/views/archives_sidebar/_content.html.erb (1.1ms)
+  Rendered lib/static_sidebar/app/views/static_sidebar/_content.html.erb (0.4ms)
+  Rendered lib/meta_sidebar/app/views/meta_sidebar/_content.html.erb (1.1ms)
+Completed 200 OK in 1073.6ms (Views: 701.0ms | ActiveRecord: 6.3ms)
+
+
+Started GET "/stylesheets/theme/bootstrap.min.css" for 127.0.0.1 at 2014-03-24 11:12:39 +0300
+Processing by ThemeController#stylesheets as HTML
+  Parameters: {"filename"=>"bootstrap.min.css"}
+  [1m[36mTrigger Load (0.2ms)[0m  [1mSELECT "triggers".* FROM "triggers" WHERE (due_at <= '2014-03-24 08:12:39.610306')[0m
+  [1m[35mBlog Load (0.1ms)[0m  SELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1
+Sent file /home/danogwok/projects/danogwok/themes/bootstrap/stylesheets/bootstrap.min.css (0.1ms)
+Completed 200 OK in 4.0ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/stylesheets/theme/style.css" for 127.0.0.1 at 2014-03-24 11:12:39 +0300
+Processing by ThemeController#stylesheets as HTML
+  Parameters: {"filename"=>"style.css"}
+  [1m[36mTrigger Load (0.2ms)[0m  [1mSELECT "triggers".* FROM "triggers" WHERE (due_at <= '2014-03-24 08:12:39.620088')[0m
+  [1m[35mBlog Load (0.1ms)[0m  SELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1
+Sent file /home/danogwok/projects/danogwok/themes/bootstrap/stylesheets/style.css (0.1ms)
+Completed 200 OK in 3.3ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/publify.js" for 127.0.0.1 at 2014-03-24 11:12:39 +0300
+Served asset /publify.js - 200 OK (73ms)
+
+
+Started GET "/assets/publify.css" for 127.0.0.1 at 2014-03-24 11:12:39 +0300
+Served asset /publify.css - 200 OK (3ms)
+
+
+Started GET "/images/theme/background.gif" for 127.0.0.1 at 2014-03-24 11:12:39 +0300
+Processing by ThemeController#images as HTML
+  Parameters: {"filename"=>"background.gif"}
+  [1m[36mTrigger Load (0.2ms)[0m  [1mSELECT "triggers".* FROM "triggers" WHERE (due_at <= '2014-03-24 08:12:39.831637')[0m
+  [1m[35mBlog Load (0.1ms)[0m  SELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1
+Sent file /home/danogwok/projects/danogwok/themes/bootstrap/images/background.gif (0.1ms)
+Completed 200 OK in 3.9ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/images/theme/bg1.jpg" for 127.0.0.1 at 2014-03-24 11:12:39 +0300
+Processing by ThemeController#images as HTML
+  Parameters: {"filename"=>"bg1.jpg"}
+  [1m[36mTrigger Load (0.2ms)[0m  [1mSELECT "triggers".* FROM "triggers" WHERE (due_at <= '2014-03-24 08:12:39.843345')[0m
+  [1m[35mBlog Load (0.2ms)[0m  SELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1
+Sent file /home/danogwok/projects/danogwok/themes/bootstrap/images/bg1.jpg (0.1ms)
+Completed 200 OK in 3.8ms (ActiveRecord: 0.4ms)
+
+
+Started GET "/images/theme/header-menu.png" for 127.0.0.1 at 2014-03-24 11:12:39 +0300
+Processing by ThemeController#images as HTML
+  Parameters: {"filename"=>"header-menu.png"}
+  [1m[36mTrigger Load (0.3ms)[0m  [1mSELECT "triggers".* FROM "triggers" WHERE (due_at <= '2014-03-24 08:12:39.854242')[0m
+  [1m[35mBlog Load (0.1ms)[0m  SELECT "blogs".* FROM "blogs" ORDER BY id LIMIT 1
+Sent file /home/danogwok/projects/danogwok/themes/bootstrap/images/header-menu.png (0.1ms)
+Completed 200 OK in 4.6ms (ActiveRecord: 0.4ms)
