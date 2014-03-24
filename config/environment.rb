@@ -31,7 +31,7 @@ Publify::Application.initialize!
  	:domain => 'danogwok.herokuapp.com', 
  	:authentication => :plain, 
  	:username => 'danogwok@gmail.com', 
- 	:password => '123reginald1' 
+ 	:password => 'password' 
  } 
 
 # end
