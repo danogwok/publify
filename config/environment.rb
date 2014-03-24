@@ -1,6 +1,8 @@
 # Load the rails application
 require File.expand_path('../application', __FILE__)
 
+require “smtp_tls”
+
 # Initialize the rails application
 Publify::Application.initialize!
 # Publify::Application.configure do
@@ -38,6 +40,7 @@ Publify::Application.initialize!
  	:user_name => 'danogwok@gmail.com', 
  	:password => '123reginald1',
  	:enable_starttls_auto => true
+ 	STARTTLS
  } 
 
 # end
