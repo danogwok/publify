@@ -33,14 +33,15 @@ Publify::Application.initialize!
  # config.action_mailer.delivery_method = :smtp
  ActionMailer::Base.smtp_settings = { 
  	# :tls => true, 
+ 	:enable_starttls_auto => true,
  	:address => 'smtp.gmail.com', 
  	:port => '587', 
  	:domain => 'danogwok.com', 
  	:authentication => :plain, 
  	:user_name => 'danogwok@gmail.com', 
- 	:password => '123reginald1',
- 	:enable_starttls_auto => true
- 	STARTTLS
+ 	:password => '123reginald1'
+ 	# :enable_starttls_auto => true
+ 	
  } 
 
 # end
