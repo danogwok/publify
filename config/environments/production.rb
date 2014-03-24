@@ -26,4 +26,15 @@ Publify::Application.configure do
 
   # Enable threaded mode
   # config.threadsafe!
+
+
+  # AWS.config({
+  #   :access_key_id => 'AKIAJSB4AG7U7JXP4EQA',
+  #   :secret_access_key => '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',
+  # })
+
+  # heroku config:set provider=AWS \
+  # aws_access_key_id=AKIAJSB4AG7U7JXP4EQA \
+  # aws_secret_access_key=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 \
+  # aws_bucket=uwori-1
 end

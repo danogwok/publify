@@ -13,7 +13,7 @@ Publify::Application.initialize!
 # 	:domain => “danogwok.herokuapp.com”, 
 # 	:authentication => :plain, 
 # 	:username => “danogwok@gmail.com”, 
-# 	:password => “123reginald1” }
+# 	:password => “password” }
 
 # ActionMailer::Base.smtp_settings = {
 #     :tls => true,
@@ -22,16 +22,22 @@ Publify::Application.initialize!
 #     :domain => "danogwok.herokuapp.com",
 #     :authentication => :plain,
 #     :username => 'danogwok', 
-# 	:password => '123reginald1' 
+# 	:password => 'password' 
 #   }
+
+# ActionMailer::Base.delivery_method = :sendmail
+ ActionMailer::Base.delivery_method = :smtp
+ # config.action_mailer.delivery_method = :smtp
  ActionMailer::Base.smtp_settings = { 
+
  	:tls => true, 
  	:address => 'smtp.gmail.com', 
  	:port => '587', 
- 	:domain => 'danogwok.herokuapp.com', 
+ 	:domain => 'danogwok.com', 
  	:authentication => :plain, 
  	:username => 'danogwok@gmail.com', 
- 	:password => 'password' 
+ 	:password => '123reginald1',
+ 	:enable_starttls_auto => true
  } 
 
 # end
@@ -44,7 +50,7 @@ Publify::Application.initialize!
 #   port:                 587,
 #   domain:               'danogwok.herokuapp.com',
 #   user_name:            'danogwok@gmail.com',
-#   password:             '123reginald1',
+#   password:             'password',
 #   authentication:       'plain',
 #   enable_starttls_auto: true  }
 
